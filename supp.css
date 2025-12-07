@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Protein Supplement Store</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root {
+      --blue1: #3a7bd5;
+      --blue2: #00d2ff;
+      --white: #fff;
+      --gray: #f2f4f8;
+      --card: #e9f4fb;
+      --shadow: 0 2px 8px rgba(0,0,0,0.07);
+      --radius: 16px;
+    }
+    body {
+      background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      color: #1a2233;
+    }
+    
+    header {
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(4px);
+      color: white ;
+      padding: 1.2rem 2rem;
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: 1px;
+      border-bottom: 2px solid #b3e2ff66;
+    }
+    nav {
+      margin: 0;
+      padding: 0.5rem 2rem;
+      background: transparent;
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    nav button {
+      background: none;
+      border: none;
+      color: var(--white);
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: color 0.15s;
+      border-radius: 5px;
+    }
+    button {
+    appearance: auto;
+    font-style: ;
+    font-variant-ligatures: ;
+    font-variant-caps: ;
+    font-variant-numeric: ;
+    font-variant-east-asian: ;
+    font-variant-alternates: ;
+    font-variant-position: ;
+    font-variant-emoji: ;
+    font-weight: 1.5em;
+    font-stretch: ;
+    font-size: 1.4em;
+    border-radius:5px;
+    font-family: ;
+    font-optical-sizing: ;
+    font-size-adjust: ;
+    font-kerning: ;
+    font-feature-settings: ;
+    font-variation-settings: ;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 2px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    cursor: default;
+    box-sizing: border-box;
+    background-color: #b3e2ff;
+    margin: 0em 0em 0em 0em;
+    padding-block: 7px;
+    padding-inline: 10px;
+    border-width: 3px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
+}
+    nav button.active,
+    nav button:hover {
+      background: var(--white);
+      color: var(--blue1);
+    }
+    .container {
+      max-width: 1100px;
+      margin: 36px auto 0 auto;
+      background: rgba(255,255,255,0.98);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem 2rem 3rem 2rem;
+      min-height: 60vh;
+    }
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+      min-height: 420px;
+    }
+    .card img {
+      width: 148px;
+      height: 148px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 16px #3a7bd533;
+      background: #e0f2fc;
+      border: 2px solid #b3e2ff66;
+    }
+    .card h3 {
+      margin: 0.6rem 0 0.3rem 0;
+      font-size: 1.12rem;
+      font-weight: 600;
+      color: #2366a6;
+      min-height: 40px;
+    }
+    .card p {
+      font-size: 0.97rem;
+      margin: 0.3rem 0 0.2rem 0;
+      color: #355c7d;
+      min-height: 40px;
+    }
+    .card .price {
+      font-size: 1.13rem;
+      font-weight: bold;
+      color: #0b254e;
+      margin: 0.5rem 0;
+    }
+    .card button {
+      background: linear-gradient(90deg, var(--blue1), var(--blue2));
+      color: var(--white);
+      border: none;
+      padding: 0.5rem 1.3rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0.3rem 0.15rem;
+      cursor: pointer;
+      transition: background 0.18s;
+      box-shadow: 0 1px 4px #3a7bd533;
+    }
+    .card button:disabled {
+      background: #c4e0ef;
+      cursor: not-allowed;
+      color: #6c92ad;
+    }
+    .cart-list {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    .cart-list th, .cart-list td {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid #b3e2ff66;
+      text-align: left;
+      font-size: 1.01rem;
+    }
+    .cart-list th {
+      background: #ecf8ff;
+      color: #2b6399;
+    }
+    .cart-list td img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #f7fafd;
+    }
+    .cart-actions {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+    .total-row {
+      font-weight: bold;
+      color: #1a2233;
+      background: #def6ff;
+      font-size: 1.03rem;
+    }
+    .product-details {
+      display: flex;
+      gap: 2.5rem;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
+    }
+    .product-details img {
+      width: 220px;
+      height: 220px;
+      border-radius: 18px;
+      box-shadow: 0 2px 16px #3a7bd533;
+      object-fit: contain;
+      background: #e0f2fc;
+    }
+    .product-info {
+      flex: 1;
+    }
+    .product-info h2 {
+      color: #2366a6;
+      margin-top: 0;
+    }
+    .product-info .price {
+      color: #0b254e;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin: 1rem 0 0.7rem 0;
+    }
+    .payment-form {
+      max-width: 400px;
+      margin: 2rem auto 0 auto;
+      background: #f2f7fc;
+      border-radius: 10px;
+      padding: 1.5rem 2rem 1.5rem 2rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+    }
+    .payment-form label {
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+    .payment-form input {
+      padding: 0.6rem 1rem;
+      border: 1px solid #b3e2ff66;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border 0.13s;
+      outline: none;
+    }
+    .payment-form input:focus {
+      border: 1.5px solid var(--blue1);
+    }
+    .payment-form .err {
+      color: #d8000c;
+      font-size: 0.92rem;
+      margin-top: -0.7rem;
+      margin-bottom: 0.3rem;
+      display: block;
+      min-height: 22px;
+    }
+    .payment-form button {
+      margin-top: 1rem;
+      background: linear-gradient(90deg, var(--blue1), var(--blue2));
+      color: var(--white);
+      font-weight: 600;
+      border: none;
+      padding: 0.7rem 1.6rem;
+      border-radius: 7px;
+      font-size: 1.08rem;
+      box-shadow: 0 2px 8px #3a7bd533;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .payment-form button:disabled {
+      background: #aee4ff;
+      color: #5f7c8a;
+      cursor: not-allowed;
+    }
+    .success {
+      background: #e9f9ec;
+      color: #198754;
+      border: 1px solid #b7eac9;
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin: 2rem auto 0 auto;
+      max-width: 400px;
+      font-size: 1.18rem;
+      text-align: center;
+    }
+    @media (max-width: 700px) {
+      .container { padding: 1rem 0.2rem 2rem 0.2rem; }
+      .product-details { flex-direction: column; align-items: center; gap: 1rem;}
+      .product-details img { width: 90vw; max-width: 330px; height: auto;}
+      .payment-form { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  
+  <header>Protein Supplement Store</header>
+  <nav>
+    <button id="nav-home" herf="index.php" class="active" onclick="showPage('home')">Home</button>
+    <button id="nav-cart" onclick="showPage('cart')">Cart (<span id="cart-count">0</span>)</button>
+  </nav>
+  <div class="container" id="main-content"></div>
+
+  <script>
+    // -- Product Data (10 max) --
+    const PRODUCTS = [
+      {
+        id: 1,
+        name: "Whey Gold Standard",
+        price: 2999,
+        image: "https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&w=400&q=80",
+        desc: "Top quality whey protein for muscle growth. 24g protein/serving.",
+        details: "100% Whey - 24g protein per scoop. 5.5g BCAAs. 1g Sugar. Gluten-free. Superb taste. 2kg pack."
+      },
+      {
+        id: 2,
+        name: "Isolate Pro Max",
+        price: 3499,
+        image: "https://images.unsplash.com/photo-1523473827535-2e7a57b4fa32?auto=format&w=400&q=80",
+        desc: "High-purity whey isolate for lean muscle.",
+        details: "Zero carbs, zero fat. 27g protein. Fast absorption. Lactose-free. 1kg tub."
+      },
+      {
+        id: 3,
+        name: "Muscle Gainer XXL",
+        price: 2099,
+        image: "https://images.unsplash.com/photo-1519865128636-7fbb7d6e9bc8?auto=format&w=400&q=80",
+        desc: "Mass gainer with protein, carbs, and creatine.",
+        details: "30g protein, 55g carbs, 3g creatine. Chocolate flavor. 3kg bag."
+      },
+      {
+        id: 4,
+        name: "Casein Night Protein",
+        price: 2599,
+        image: "https://images.unsplash.com/photo-1519865006883-4f1b3cbe6e8c?auto=format&w=400&q=80",
+        desc: "Slow-digesting protein for night-time recovery.",
+        details: "23g protein. Slow absorption. Vanilla flavor. 1.5kg tub."
+      },
+      {
+        id: 5,
+        name: "Plant Protein Blend",
+        price: 1999,
+        image: "https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&w=400&q=80",
+        desc: "Vegan protein from peas, brown rice, and seeds.",
+        details: "21g protein, 0 sugar. Non-GMO, gluten-free. 1kg pack."
+      },
+      {
+        id: 6,
+        name: "Egg White Protein",
+        price: 2199,
+        image: "https://images.unsplash.com/photo-1523473827535-2e7a57b4fa32?auto=format&w=400&q=80",
+        desc: "Pure egg white protein for lean muscle.",
+        details: "24g protein. Fat-free. Easily digestible. 900g tub."
+      },
+      {
+        id: 7,
+        name: "Hydro Whey Ultra",
+        price: 3999,
+        image: "https://images.unsplash.com/photo-1519865128636-7fbb7d6e9bc8?auto=format&w=400&q=80",
+        desc: "Hydrolyzed whey for rapid absorption.",
+        details: "28g protein per scoop. 0 sugar, 0 fat. 1.2kg tub. Chocolate flavor."
+      },
+      {
+        id: 8,
+        name: "BCAA Energy Fuel",
+        price: 1299,
+        image: "https://images.unsplash.com/photo-1519865006883-4f1b3cbe6e8c?auto=format&w=400&q=80",
+        desc: "BCAA supplement for workout recovery.",
+        details: "7g BCAAs, 2g glutamine. No caffeine. 400g tub. Lemon flavor."
+      },
+      {
+        id: 9,
+        name: "Soy Protein Isolate",
+        price: 1799,
+        image: "https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&w=400&q=80",
+        desc: "High-quality soy protein for vegetarians.",
+        details: "25g protein. 0 cholesterol. 1kg bag."
+      },
+      {
+        id: 10,
+        name: "Collagen Peptides",
+        price: 2499,
+        image: "https://images.unsplash.com/photo-1523473827535-2e7a57b4fa32?auto=format&w=400&q=80",
+        desc: "Collagen peptides for joint and skin health.",
+        details: "Type I & III Collagen. Unflavored. 500g pouch."
+      }
+    ];
+
+    // -- Cart State (localStorage for demo) --
+    const CART_KEY = "protein_cart";
+    function getCart() {
+      try {
+        return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+      } catch { return []; }
+    }
+    function setCart(cart) {
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
+    function addToCart(pid) {
+      let cart = getCart();
+      let found = cart.find(c => c.id === pid);
+      if (found) found.qty += 1;
+      else cart.push({ id: pid, qty: 1 });
+      setCart(cart);
+      updateCartCount();
+    }
+    function removeFromCart(pid) {
+      let cart = getCart();
+      cart = cart.filter(c => c.id !== pid);
+      setCart(cart);
+      updateCartCount();
+    }
+    function updateCartCount() {
+      document.getElementById('cart-count').textContent = getCart().reduce((s,c) => s+c.qty, 0);
+    }
+
+    // -- Page Navigation --
+    function showPage(page, data) {
+      // nav highlight
+      document.getElementById("nav-home").classList.remove("active");
+      document.getElementById("nav-cart").classList.remove("active");
+      if (page === 'home') document.getElementById("nav-home").classList.add("active");
+      if (page === 'cart') document.getElementById("nav-cart").classList.add("active");
+      // load page
+      if (page === 'home') renderProductList();
+      else if (page === 'details') renderProductDetails(data);
+      else if (page === 'cart') renderCart();
+      else if (page === 'payment') renderPayment(data);
+      else if (page === 'success') renderSuccess();
+    }
+
+    // -- Render Home/Product List --
+    function renderProductList() {
+      let html = `<div class="product-list">`;
+      for (let p of PRODUCTS) {
+        html += `
+        <div class="card">
+          <img src="${p.image}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+          <div class="price">₹${p.price.toLocaleString()}</div>
+          <button onclick="showPage('details', ${p.id})">View Details</button>
+          <button onclick="addToCartHandler(${p.id})">Add to Cart</button>
+        </div>
+        `;
+      }
+      html += `</div>`;
+      document.getElementById('main-content').innerHTML = html;
+    }
+
+    function addToCartHandler(pid) {
+      addToCart(pid);
+      alert("Added to cart!");
+    }
+
+    // -- Render Product Details --
+    function renderProductDetails(pid) {
+      const prod = PRODUCTS.find(p => p.id === pid);
+      if (!prod) return showPage('home');
+      let html = `
+      <div class="product-details">
+        <img src="${prod.image}" alt="${prod.name}">
+        <div class="product-info">
+          <h2>${prod.name}</h2>
+          <div class="price">₹${prod.price.toLocaleString()}</div>
+          <p>${prod.details}</p>
+          <div style="margin:1.2rem 0;">
+            <button onclick="addToCartHandler(${prod.id})">Add to Cart</button>
+            <button onclick="showPage('payment', [${prod.id}])">Pay Now</button>
+          </div>
+          <button style="background:#e0eaff;color:#2b6399;" onclick="showPage('home')">← Back to All Products</button>
+        </div>
+      </div>
+      `;
+      document.getElementById('main-content').innerHTML = html;
+    }
+
+    // -- Render Cart Page --
+    function renderCart() {
+      let cart = getCart();
+      if (!cart.length) {
+        document.getElementById('main-content').innerHTML = `
+        <h2>Your cart is empty.</h2>
+        <button style="margin-top:1.5rem;" onclick="showPage('home')">← Shop Products</button>
+        `;
+        return;
+      }
+      let rows = '', total = 0;
+      for (let c of cart) {
+        let p = PRODUCTS.find(x => x.id === c.id);
+        if (!p) continue;
+        let subtotal = p.price * c.qty;
+        total += subtotal;
+        rows += `
+          <tr>
+            <td><img src="${p.image}" alt="${p.name}"></td>
+            <td>${p.name}</td>
+            <td>₹${p.price.toLocaleString()}</td>
+            <td>${c.qty}</td>
+            <td>₹${subtotal.toLocaleString()}</td>
+            <td><button onclick="removeFromCartHandler(${p.id})" style="background:#e06161;">Remove</button></td>
+          </tr>
+        `;
+      }
+      let html = `
+        <h2>Your Cart</h2>
+        <table class="cart-list">
+          <tr>
+            <th>Image</th><th>Product</th><th>Price</th><th>Qty</th><th>Subtotal</th><th>Action</th>
+          </tr>
+          ${rows}
+          <tr class="total-row">
+            <td colspan="4" style="text-align:right;">Total:</td>
+            <td colspan="2">₹${total.toLocaleString()}</td>
+          </tr>
+        </table>
+        <div class="cart-actions">
+          <button onclick="showPage('home')" style="background:#e0eaff;color:#2b6399;">← Continue Shopping</button>
+          <button onclick="showPage('payment')">Proceed to Payment</button>
+        </div>
+      `;
+      document.getElementById('main-content').innerHTML = html;
+    }
+    function removeFromCartHandler(pid) {
+      removeFromCart(pid);
+      renderCart();
+    }
+
+    // -- Render Payment Page --
+    function renderPayment(payPidList) {
+      let cart = getCart();
+      let items = [];
+      if (Array.isArray(payPidList) && payPidList.length) {
+        // Only pay for a specific product, not full cart
+        for (let pid of payPidList) {
+          let prod = PRODUCTS.find(p => p.id === pid);
+          if (prod) items.push({ ...prod, qty: 1 });
+        }
+      } else {
+        for (let c of cart) {
+          let prod = PRODUCTS.find(p => p.id === c.id);
+          if (prod) items.push({ ...prod, qty: c.qty });
+        }
+      }
+      if (!items.length) {
+        showPage('cart');
+        return;
+      }
+      let total = 0, summary = '';
+      for (let item of items) {
+        total += item.price * item.qty;
+        summary += `<div style="margin-bottom:0.3rem;">${item.name} x ${item.qty} - ₹${(item.price*item.qty).toLocaleString()}</div>`;
+      }
+      let html = `
+        <h2 style="margin-bottom:1.1rem;">Payment</h2>
+        <div style="margin-bottom:1.3rem;">
+          <strong>Order:</strong>
+          <div>${summary}</div>
+          <div style="margin-top:0.3rem;font-weight:bold;">Total: ₹${total.toLocaleString()}</div>
+        </div>
+        <form class="payment-form" id="payform" autocomplete="off" onsubmit="return paySubmit(event, ${JSON.stringify(payPidList||null)})">
+          <label>Name on Card</label>
+          <input type="text" id="payname" required maxlength="32" placeholder="Full Name">
+          <span class="err" id="err-name"></span>
+          <label>Card Number</label>
+          <input type="text" id="paycard" maxlength="19" pattern="\\d{16}" placeholder="1234 5678 9012 3456" required>
+          <span class="err" id="err-card"></span>
+          <label>Expiry (MM/YY)</label>
+          <input type="text" id="payexp" maxlength="5" placeholder="MM/YY" required>
+          <span class="err" id="err-exp"></span>
+          <label>CVV</label>
+          <input type="password" id="paycvv" maxlength="4" pattern="\\d{3,4}" required placeholder="CVV">
+          <span class="err" id="err-cvv"></span>
+          <button type="submit">Pay ₹${total.toLocaleString()}</button>
+        </form>
+        <button style="margin-top:1.5rem;background:#e0eaff;color:#2b6399;" onclick="showPage('cart')">← Back to Cart</button>
+      `;
+      document.getElementById('main-content').innerHTML = html;
+    }
+
+    // -- Pay Validation and Submit --
+    function paySubmit(e, payPidList) {
+      e.preventDefault();
+      let isValid = true;
+      // Name
+      let name = document.getElementById('payname').value.trim();
+      if (!name.match(/^[a-zA-Z ]{3,}$/)) {
+        document.getElementById('err-name').textContent = "Enter valid full name (min 3 letters)";
+        isValid = false;
+      } else document.getElementById('err-name').textContent = "";
+      // Card
+      let card = document.getElementById('paycard').value.replace(/\s+/g,'');
+      if (!/^\d{16}$/.test(card)) {
+        document.getElementById('err-card').textContent = "Card number must be 16 digits";
+        isValid = false;
+      } else document.getElementById('err-card').textContent = "";
+      // Expiry
+      let exp = document.getElementById('payexp').value.trim();
+      if (!/^\d{2}\/\d{2}$/.test(exp)) {
+        document.getElementById('err-exp').textContent = "Expiry format MM/YY";
+        isValid = false;
+      } else {
+        // Check future date
+        let [mm, yy] = exp.split('/').map(Number);
+        let now = new Date();
+        let curY = now.getFullYear()%100, curM = now.getMonth()+1;
+        if (mm < 1 || mm > 12 || yy < curY || (yy===curY && mm<curM)) {
+          document.getElementById('err-exp').textContent = "Card expired";
+          isValid = false;
+        } else document.getElementById('err-exp').textContent = "";
+      }
+      // CVV
+      let cvv = document.getElementById('paycvv').value.trim();
+      if (!/^\d{3,4}$/.test(cvv)) {
+        document.getElementById('err-cvv').textContent = "CVV must be 3 or 4 digits";
+        isValid = false;
+      } else document.getElementById('err-cvv').textContent = "";
+      if (!isValid) return false;
+      // "Payment" success
+      setTimeout(() => {
+        // if from cart, clear, else remove single item
+        if (Array.isArray(payPidList) && payPidList.length) {
+          let cart = getCart();
+          for (let pid of payPidList) {
+            let idx = cart.findIndex(c => c.id === pid);
+            if (idx>-1) cart.splice(idx,1);
+          }
+          setCart(cart);
+        } else setCart([]);
+        updateCartCount();
+        showPage('success');
+      }, 700);
+      return false;
+    }
+
+    // -- Payment Success Page --
+    function renderSuccess() {
+      document.getElementById('main-content').innerHTML = `
+        <div class="success">
+          <div>✅ Payment Successful!</div>
+          <div style="margin-top:0.7rem;">Thank you for your order.</div>
+        </div>
+        <div style="text-align:center;margin-top:2rem;">
+          <button onclick="showPage('home')">← Shop More</button>
+        </div>
+      `;
+    }
+
+    // -- On Load --
+    updateCartCount();
+    showPage('home');
+    // Expose for HTML
+    window.showPage = showPage;
+    window.addToCartHandler = addToCartHandler;
+    window.removeFromCartHandler = removeFromCartHandler;
+    window.paySubmit = paySubmit;
+  </script>
+</body>
+</html>
